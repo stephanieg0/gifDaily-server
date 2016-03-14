@@ -4,7 +4,6 @@ const app = express();
 const routes = require('./routes/index.js');
 const PORT = process.env.PORT || 3000;
 
-
 app.use(express.static('www'));
 
 
@@ -16,7 +15,6 @@ app.all('*', function(req, res, next) {
 });
 
 app.use(routes);
-
 
 app.listen(PORT, function () {
     console.log('Express server listening on port ' + `${PORT}`);
