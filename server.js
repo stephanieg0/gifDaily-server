@@ -8,13 +8,19 @@ pg.defaults.ssl = false;//dev should be false. On Heroku should be true.
 
 const routes    = require('./routes/index.js');
 
-const models = require('./models/models.js');
+const db = require('./models/');
 
 const PORT      = process.env.PORT || 3000;
 
 //enviroment variable set on heroku or use my localhost for dev.
 const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/gifdailydb';
 
+const Sequelize = require('sequelize');
+
+//connection to the database
+const sequelize = new Sequelize(DATABASE_URL);
+
+db.sequelize.sync();
 
 app.use(express.static('www'));
 
@@ -28,11 +34,11 @@ app.all('*', function(req, res, next) {
 app.use(routes);
 
 //connecting to postgres database
-pg.connect(DATABASE_URL, function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
+//pg.connect(DATABASE_URL, function(err, client) {
+  //if (err) throw err;
+  //console.log('Connected to postgres! Getting schemas...');
 
-});
+//});
 
 app.listen(PORT, function () {
     console.log('Express server listening on port ' + `${PORT}`);

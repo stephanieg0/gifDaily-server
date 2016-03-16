@@ -1,10 +1,5 @@
 'use strict';
 
-const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/gifdailydb';
-const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize(DATABASE_URL);
-
 //Favorites Schema model
 module.exports = function(sequelize, DataTypes) {
   var Favorites = sequelize.define('Favorites', {
@@ -29,6 +24,5 @@ module.exports = function(sequelize, DataTypes) {
 
 };
 
-sequelize.sync();
 
 
