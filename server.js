@@ -4,18 +4,16 @@ const express   = require('express');
 const app       = express();
 
 const pg        = require('pg');
-pg.defaults.ssl = false;
-
-const Sequelize = require('sequelize');
+pg.defaults.ssl = false;//dev should be false. On Heroku should be true.
 
 const routes    = require('./routes/index.js');
+
+const models = require('./models/models.js');
 
 const PORT      = process.env.PORT || 3000;
 
 //enviroment variable set on heroku or use my localhost for dev.
 const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/gifdailydb';
-
-const sequelize = new Sequelize(DATABASE_URL);
 
 
 app.use(express.static('www'));
