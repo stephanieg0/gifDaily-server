@@ -19,6 +19,10 @@ app.get('/', cache('1 hour'), (req, res, next) => {
   });
 });
 
+//post from front end
+app.post('/', (req, res) => {
 
+  console.log(req);
+});
 module.exports = app;
 
