@@ -18,7 +18,7 @@ const Sequelize = require('sequelize');
 //connection to the database
 const sequelize = new Sequelize(DATABASE_URL);
 
-db.sequelize.sync();
+db.sequelize.sync({ force: true });
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
 app.all('*', function(req, res, next) {

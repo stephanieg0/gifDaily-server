@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       tableName: 'Favorites',
+      timestamps: false,
       classMethods: {
         associate: function(models) {
         // associations can be defined here
