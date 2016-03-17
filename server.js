@@ -2,6 +2,7 @@
 
 const express   = require('express');
 const app       = express();
+const bodyParser = require('body-parser');
 const pg        = require('pg');
 const routes    = require('./routes/index.js');
 const db        = require('./models/');
@@ -29,6 +30,9 @@ app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
     next();
 });
+
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 
 app.use(routes);
 
