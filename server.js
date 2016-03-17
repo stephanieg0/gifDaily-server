@@ -2,7 +2,6 @@
 
 const express   = require('express');
 const app       = express();
-const bodyParser = require('body-parser')
 const pg        = require('pg');
 const routes    = require('./routes/index.js');
 const db        = require('./models/');
@@ -31,17 +30,8 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-app.use(bodyParser.urlencoded({ extended: false}));
-app.use(bodyParser.json());
-
 app.use(routes);
 
-//connecting to postgres database
-//pg.connect(DATABASE_URL, function(err, client) {
-  //if (err) throw err;
-  //console.log('Connected to postgres! Getting schemas...');
-
-//});
 
 app.listen(PORT, function () {
     console.log('Express server listening on port ' + `${PORT}`);
