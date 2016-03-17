@@ -22,7 +22,10 @@ app.get('/', cache('1 hour'), (req, res, next) => {
 //post from front end
 app.post('/', (req, res) => {
 
-  console.log(req);
+  console.log(req.body);
+
+  res.sendStatus(200);
 });
+
 module.exports = app;
 
