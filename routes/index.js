@@ -30,5 +30,12 @@ app.post('/', (req, res) => {
   res.sendStatus(200);
 });
 
+app.get('/favorites', (req, res) => {
+  db.Favorites.findAll().then((favorites) => {
+    console.log('FAV>', favorites);
+    res.send(favorites);
+  });
+});
+
 module.exports = app;
 
