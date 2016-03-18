@@ -32,10 +32,18 @@ app.post('/', (req, res) => {
 
 app.get('/favorites', (req, res) => {
   db.Favorites.findAll().then((favorites) => {
-    console.log('FAV>', favorites);
+
     res.send(favorites);
   });
 });
 
+app.delete('/favorites/:id', (req, res) => {
+  console.log(req.params);
+  db.Favorites.destroy({where: {FavoriteId: req.params.id} }).then((numDestroid) => {
+
+    res.sendStatus(200);
+
+  });
+});
 module.exports = app;
 
