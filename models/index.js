@@ -5,14 +5,13 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
-var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
-} else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+//enviroment variable set on heroku or use my localhost for dev.
+const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/gifdailydb';
+
+//connection to the database
+const sequelize = new Sequelize(DATABASE_URL);
 
 fs
   .readdirSync(__dirname)

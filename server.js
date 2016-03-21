@@ -10,14 +10,6 @@ const PORT      = process.env.PORT || 3000;
 
 pg.defaults.ssl = false;//dev should be false. On Heroku should be true.
 
-//enviroment variable set on heroku or use my localhost for dev.
-const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/gifdailydb';
-
-const Sequelize = require('sequelize');
-
-//connection to the database
-const sequelize = new Sequelize(DATABASE_URL);
-
 db.sequelize.sync();
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
