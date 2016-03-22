@@ -15,7 +15,7 @@ db.sequelize.sync();
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
 app.all('*', function(req, res, next) {
     // Website allowed to connect
-    res.header("Access-Control-Allow-Origin", "http://localhost:8100");
+    res.header("Access-Control-Allow-Origin", "*");
     // Request methods allowed
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     // Request headers allowed
