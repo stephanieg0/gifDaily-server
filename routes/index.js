@@ -9,6 +9,8 @@ const cache     = apicache.middleware;
 const db        = require('../models/');
 const URL       = 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC';
 
+//passport auth strategy
+require('../user/localStrategy');
 
 app.get('/', cache('1 hour'), (req, res, next) => {
 
