@@ -2,6 +2,7 @@
 
 const express   = require('express');
 const app       = express();
+const passport = require('passport');
 const request   = require('request');
 const apicache  = require('apicache').options({ debug: true });
 const cache     = apicache.middleware;
@@ -47,7 +48,12 @@ app.delete('/favorites/:id', (req, res) => {
 });
 
 app.post('/signUp', (req, res) => {
-  console.log(req.body);
+  passport.authenticate('local', {failureFlash: 'Invalid username or password.',
+                                  successFlash: 'Welcome!'}),
+  function(req, res) {
+    console.log('success!');
+    res.sendStatus(200);
+  };
 });
 
 app.post('/login', (req, res) => {

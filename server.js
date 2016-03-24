@@ -5,6 +5,8 @@ const app       = express();
 const bodyParser = require('body-parser');
 const pg        = require('pg');
 const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
 const routes    = require('./routes/index.js');
 const db        = require('./models/');
 const PORT      = process.env.PORT || 3000;
@@ -28,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
 //for logings
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
