@@ -45,5 +45,15 @@ app.delete('/favorites/:id', (req, res) => {
 
   });
 });
+
+app.post('/signUp', (req, res) => {
+  console.log(req.body);
+});
+
+app.post('/login', (req, res) => {
+  console.log(req.body);
+});
+
+
 module.exports = app;
 
