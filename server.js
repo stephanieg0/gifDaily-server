@@ -4,6 +4,7 @@ const express   = require('express');
 const app       = express();
 const bodyParser = require('body-parser');
 const pg        = require('pg');
+const passport = require('passport');
 const routes    = require('./routes/index.js');
 const db        = require('./models/');
 const PORT      = process.env.PORT || 3000;
@@ -26,8 +27,11 @@ app.all('*', function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
-app.use(routes);
+//for logings
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use(routes);
 
 app.listen(PORT, function () {
     console.log('Express server listening on port ' + `${PORT}`);
