@@ -1,4 +1,8 @@
 'use strict';
+const bcrypt = require('bcrypt');
+
+const BCRYPT_DIFFICULTY = 11;
+
 
 //Favorites Schema model
 module.exports = function(sequelize, DataTypes) {
@@ -26,4 +30,28 @@ module.exports = function(sequelize, DataTypes) {
 };
 
 
+//User Schema model
+module.exports = function(sequelize, DataTypes) {
+  var Users = sequelize.define('Users', {
+      UserId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      email: DataTypes.STRING,
+      password: DataTypes.STRING
+    },
+    {
+      tableName: 'Users',
+      timestamps: false,
+      classMethods: {
+        associate: function(models) {
+        // associations can be defined here
+        // Favorites.belongsto(model.User)
+        }
+      }
+    });
+  return Users;
+
+};
 

@@ -12,6 +12,7 @@ const URL       = 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC';
 //passport auth strategy
 require('../lib/localStrategy');
 
+//request to giphy's api and caching
 app.get('/', cache('1 hour'), (req, res, next) => {
 
   request.get(URL, (error, response, body) => {
@@ -22,7 +23,7 @@ app.get('/', cache('1 hour'), (req, res, next) => {
   });
 });
 
-//post from front end
+//post request to save a favorite gif
 app.post('/', (req, res) => {
 
   console.log(req.body);
@@ -33,6 +34,7 @@ app.post('/', (req, res) => {
   res.sendStatus(200);
 });
 
+//request to display saved gifs
 app.get('/favorites', (req, res) => {
   db.Favorites.findAll().then((favorites) => {
 
@@ -40,6 +42,7 @@ app.get('/favorites', (req, res) => {
   });
 });
 
+//deleting specific gif
 app.delete('/favorites/:id', (req, res) => {
   console.log(req.params);
   db.Favorites.destroy({where: {FavoriteId: req.params.id} }).then((numDestroid) => {
@@ -49,8 +52,10 @@ app.delete('/favorites/:id', (req, res) => {
   });
 });
 
+//creating new user
 app.post('/signUp', (req, res) => {
 });
+
 
 app.post('/login', (req, res) => {
   console.log(req.body);
