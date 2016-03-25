@@ -10,7 +10,7 @@ const db        = require('../models/');
 const URL       = 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC';
 
 //passport auth strategy
-require('../user/localStrategy');
+require('../lib/localStrategy');
 
 app.get('/', cache('1 hour'), (req, res, next) => {
 
@@ -50,16 +50,16 @@ app.delete('/favorites/:id', (req, res) => {
 });
 
 app.post('/signUp', (req, res) => {
-  passport.authenticate('local', {failureFlash: 'Invalid username or password.',
-                                  successFlash: 'Welcome!'}),
-  function(req, res) {
-    console.log('success!');
-    res.sendStatus(200);
-  };
 });
 
 app.post('/login', (req, res) => {
   console.log(req.body);
+  passport.authenticate('local', {failureFlash: 'Invalid username or password.',
+                                  successFlash: 'Welcome!'}),
+    function(req, res) {
+      console.log('success!');
+      res.sendStatus(200);
+    };
 });
 
 
