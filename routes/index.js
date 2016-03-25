@@ -61,6 +61,7 @@ app.post('/signUp', (req, res) => {
   }).then((user) => {
 
     if (user) {
+      console.log('signup error');
       res.sendStatus(400);
     } else {
       console.log('user does not exists');
@@ -72,15 +73,14 @@ app.post('/signUp', (req, res) => {
 });
 
 //Authenticating user
-app.post('/login', (req, res) => {
-
-  passport.authenticate('local',
+app.post('/login', passport.authenticate('local',
     {
       failureFlash: 'Invalid username or password.',
       successFlash: 'Welcome!'
+    }), function (req, res) {
+      console.log('success');
+      res.sendStatus(200);
     });
-    res.sendStatus(200);
-});
 
 
 module.exports = app;

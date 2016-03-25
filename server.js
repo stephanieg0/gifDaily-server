@@ -1,15 +1,15 @@
 'use strict';
 
-const express   = require('express');
-const app       = express();
+const express    = require('express');
+const app        = express();
 const bodyParser = require('body-parser');
-const pg        = require('pg');
-const passport = require('passport');
-const flash = require('connect-flash');
-const session = require('express-session');
-const routes    = require('./routes/index.js');
-const db        = require('./models/');
-const PORT      = process.env.PORT || 3000;
+const pg         = require('pg');
+const passport   = require('passport');
+const flash      = require('connect-flash');
+const session    = require('express-session');
+const routes     = require('./routes/index.js');
+const db         = require('./models/');
+const PORT       = process.env.PORT || 3000;
 
 pg.defaults.ssl = false;//dev should be false. On Heroku should be true.
 
@@ -28,6 +28,13 @@ app.all('*', function(req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
+
+//creating express session
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
 
 //for logings
 app.use(flash());
