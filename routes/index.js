@@ -54,6 +54,13 @@ app.delete('/favorites/:id', (req, res) => {
 
 //creating new user
 app.post('/signUp', (req, res) => {
+  console.log(req.body);
+  db.Users.create({
+    email: req.body.email,
+    password: req.body.password
+  });
+  res.sendStatus(200);
+
 });
 
 
