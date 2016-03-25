@@ -46,19 +46,14 @@ module.exports = function(sequelize, DataTypes) {
       timestamps: false,
       classMethods: {
         generateHashPass: function (password, done) {
-          console.log('generateHash is running');
-          bcrypt.hash(password, BCRYPT_DIFFICULTY, (err, hash) => {
-            console.log(password, BCRYPT_DIFFICULTY);
-            if (err) throw err;
-            return password = hash;
-          });
+
+          return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
         }
       },
       instanceMethods: {
-        authenticate: function (password) {
-          bcrypt.compare(password, hash, function(err, res) {
-              console.log(res);
-          });
+        authenticate: function (password, callback) {
+
+          return bcrypt.compare(password, this.password, callback);
         }
       }
 

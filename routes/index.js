@@ -10,7 +10,7 @@ const db        = require('../models/');
 const URL       = 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC';
 
 //passport auth strategy
-require('../lib/localStrategy');
+require('../lib/local');
 
 //request to giphy's api and caching
 app.get('/', cache('1 hour'), (req, res, next) => {
@@ -54,7 +54,6 @@ app.delete('/favorites/:id', (req, res) => {
 
 //creating new user
 app.post('/signUp', (req, res) => {
-  console.log('signup route', req.body);
   db.Users.findOne({
     where: {
       email: req.body.email,
@@ -62,24 +61,25 @@ app.post('/signUp', (req, res) => {
   }).then((user) => {
 
     if (user) {
-      console.log('user Exists', user);
+      res.sendStatus(400);
     } else {
       console.log('user does not exists');
-    }
+      db.Users.create({email: req.body.email, password: db.Users.generateHashPass(req.body.password)});
+      res.sendStatus(200);
+    };
   });
-  res.sendStatus(200);
 
 });
 
-
+//Authenticating user
 app.post('/login', (req, res) => {
-  console.log(req.body);
-  passport.authenticate('local', {failureFlash: 'Invalid username or password.',
-                                  successFlash: 'Welcome!'}),
-    function(req, res) {
-      console.log('success!');
-      res.sendStatus(200);
-    };
+
+  passport.authenticate('local',
+    {
+      failureFlash: 'Invalid username or password.',
+      successFlash: 'Welcome!'
+    });
+    res.sendStatus(200);
 });
 
 
