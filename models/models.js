@@ -45,7 +45,8 @@ module.exports = function(sequelize, DataTypes) {
       tableName: 'Users',
       timestamps: false,
       classMethods: {
-        generateHashPass: function (password) {
+        generateHashPass: function (password, done) {
+          console.log('generateHash is running');
           bcrypt.hash(password, BCRYPT_DIFFICULTY, (err, hash) => {
             console.log(password, BCRYPT_DIFFICULTY);
             if (err) throw err;

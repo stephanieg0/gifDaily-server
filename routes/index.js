@@ -54,10 +54,18 @@ app.delete('/favorites/:id', (req, res) => {
 
 //creating new user
 app.post('/signUp', (req, res) => {
-  console.log(req.body);
-  db.Users.create({
-    email: req.body.email,
-    password: req.body.password
+  console.log('signup route', req.body);
+  db.Users.findOne({
+    where: {
+      email: req.body.email,
+     }
+  }).then((user) => {
+
+    if (user) {
+      console.log('user Exists', user);
+    } else {
+      console.log('user does not exists');
+    }
   });
   res.sendStatus(200);
 
