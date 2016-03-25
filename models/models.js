@@ -45,11 +45,22 @@ module.exports = function(sequelize, DataTypes) {
       tableName: 'Users',
       timestamps: false,
       classMethods: {
-        associate: function(models) {
-        // associations can be defined here
-        // Favorites.belongsto(model.User)
+        generateHashPass: function (password) {
+          bcrypt.hash(password, BCRYPT_DIFFICULTY, (err, hash) => {
+            console.log(password, BCRYPT_DIFFICULTY);
+            if (err) throw err;
+            return password = hash;
+          });
+        }
+      },
+      instanceMethods: {
+        authenticate: function (password) {
+          bcrypt.compare(password, hash, function(err, res) {
+              console.log(res);
+          });
         }
       }
+
     });
   return Users;
 
