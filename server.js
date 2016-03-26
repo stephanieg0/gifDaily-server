@@ -23,6 +23,7 @@ app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     // Request headers allowed
     res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
+    res.header("X-Frame-Options", "ALLOWALL");
     next();
 });
 

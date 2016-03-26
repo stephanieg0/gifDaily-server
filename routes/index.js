@@ -13,7 +13,7 @@ const URL       = 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC';
 require('../lib/local');
 
 //request to giphy's api and caching
-app.get('/', cache('1 hour'), (req, res, next) => {
+app.get('/', cache('5 hours'), (req, res, next) => {
 
   request.get(URL, (error, response, body) => {
     if (error) throw error;
@@ -27,6 +27,7 @@ app.get('/', cache('1 hour'), (req, res, next) => {
 app.post('/', (req, res) => {
 
   console.log(req.body);
+
   db.Favorites.create({
       Url: req.body.gifUrl
   });
