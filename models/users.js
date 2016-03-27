@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       instanceMethods: {
         authenticate: function (password, callback) {
-
+          //console.log('authenticate method', Users.Instance.prototype);
           return bcrypt.compare(password, this.password, callback);
         }
       }
