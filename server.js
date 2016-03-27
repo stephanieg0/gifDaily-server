@@ -1,16 +1,16 @@
 'use strict';
 
-const express    = require('express');
-const app        = express();
-const bodyParser = require('body-parser');
-const pg         = require('pg');
-const passport   = require('passport');
-const flash      = require('connect-flash');
-const session    = require('express-session');
-const routes     = require('./routes/index.js');
-const db         = require('./models/');
-const PORT       = process.env.PORT || 3000;
-
+const express        = require('express');
+const app            = express();
+const bodyParser     = require('body-parser');
+const pg             = require('pg');
+const passport       = require('passport');
+const flash          = require('connect-flash');
+const session        = require('express-session');
+const routes         = require('./routes/index.js');
+const db             = require('./models/');
+const PORT           = process.env.PORT || 3000;
+const SESSION_SECRET = process.env.SESSION_SECRET || 'keyboard cat';
 pg.defaults.ssl = false;//dev should be false. On Heroku should be true.
 
 db.sequelize.sync();
@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 
 //creating express session
 app.use(session({
-  secret: 'keyboard cat',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }));
