@@ -25,9 +25,9 @@ app.get('/', cache('5 hours'), (req, res) => {
 
 //post request to save a favorite gif
 app.post('/', (req, res) => {
-
   db.Favorites.create({
-      Url: req.body.gifUrl
+      Url: req.body.gifUrl,
+      UserId: req.body.UserId
   });
 
   res.sendStatus(200);
@@ -82,6 +82,12 @@ app.post('/login', passport.authenticate('local',
         res.sendStatus(200);
      });
 
+app.get('/users', (req, res) => {
+  db.Users.findAll().then((Users) => {
+    console.log(Users);
+    res.send(Users);
+  });
+});
 
 module.exports = app;
 
