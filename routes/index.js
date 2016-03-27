@@ -74,6 +74,7 @@ app.post('/signUp', (req, res) => {
 //Authenticating user
 app.post('/login', passport.authenticate('local',
     {
+      session: false,
       failureFlash: 'Invalid username or password.',
       successFlash: 'Welcome!'
     }), function (req, res) {
