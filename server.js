@@ -13,7 +13,7 @@ const PORT           = process.env.PORT || 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'keyboard cat';
 pg.defaults.ssl = false;//dev should be false. On Heroku should be true.
 
-db.sequelize.sync();
+db.sequelize.sync({force: true});
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
 app.all('*', function(req, res, next) {
